@@ -3,7 +3,7 @@
  */
 
 /* 
- * File:   CatchMain.cpp
+ * File:   TemplateTest.cpp
  * Author: Hugo Valcourt
  *
  * Created on September 21, 2018, 10:10 AM
