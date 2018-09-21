@@ -1,0 +1,31 @@
+pipeline {
+
+    environment {
+
+    
+    }
+
+    agent none
+    stages {
+    /*    stage('TEST MASTER'){
+            agent { label 'master'}
+            steps {
+              //sh "make tests run"
+            }
+        }*/
+
+        stage('DOCUMENTATION'){
+          agent { label 'master'}
+          steps {
+              //sh "make doc"
+            }
+        }
+        stage('BUILD MASTER'){
+            agent { label 'master'}
+            steps {
+              //sh "make deploy"
+            }
+        }
+    }
+
+}
