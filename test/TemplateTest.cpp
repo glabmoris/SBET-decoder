@@ -14,4 +14,5 @@
 
 TEST_CASE( "Test Template" ) {
     
+    REQUIRE(true);
 }

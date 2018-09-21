@@ -7,17 +7,17 @@ pipeline {
 
     agent none
     stages {
-    /*    stage('TEST MASTER'){
+        stage('TEST MASTER'){
             agent { label 'master'}
             steps {
-              //sh "make tests run"
+              sh "make test"
             }
-        }*/
+        }
 
         stage('DOCUMENTATION'){
           agent { label 'master'}
           steps {
-              //sh "make doc"
+              sh "make doc"
             }
         }
         stage('BUILD MASTER'){
