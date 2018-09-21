@@ -11,6 +11,7 @@
       <df name="test">
         <df name="data">
         </df>
+        <in>CatchMain.cpp</in>
         <in>TemplateTest.cpp</in>
         <in>catch.hpp</in>
       </df>

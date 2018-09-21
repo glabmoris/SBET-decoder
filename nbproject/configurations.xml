@@ -6,6 +6,7 @@
         <in>main.cpp</in>
       </df>
       <df name="test">
+        <in>CatchMain.cpp</in>
         <in>TemplateTest.cpp</in>
       </df>
       <in>JenkinsFile</in>
@@ -52,6 +53,8 @@
       <item path="JenkinsFile" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="test/CatchMain.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="test/TemplateTest.cpp" ex="false" tool="1" flavor2="0">
       </item>

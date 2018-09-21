@@ -8,10 +8,6 @@
  *
  * Created on September 21, 2018, 10:10 AM
  */
-
-
+#define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 
-TEST_CASE( "Test Template" ) {
-    
-}
