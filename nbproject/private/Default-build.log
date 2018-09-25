@@ -1,2 +1,0 @@
-mkdir -p build
-g++ -o build/sbet-decoder src/main.cpp
