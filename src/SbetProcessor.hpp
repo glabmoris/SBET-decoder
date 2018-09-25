@@ -12,6 +12,10 @@
 #include <iostream>
 #include <unistd.h>
 
+#ifdef _WIN32
+#include <io.h>
+#endif
+
 #pragma pack(1)
 typedef struct{
 	double time;    	//GPS seconds of week
@@ -41,6 +45,10 @@ class SbetProcessor{
 
 		bool readFile(std::string & filename);
 		virtual void processEntry(SbetEntry * entry)=0;
+
+	private:
+		int doRead(int fd,void* buf,unsigned int sz);
+		int doOpen(const char * filename);
 };
 
 SbetProcessor::SbetProcessor(){
@@ -51,17 +59,39 @@ SbetProcessor::~SbetProcessor(){
 
 }
 
+int SbetProcessor::doRead(int fd,void * buffer,unsigned int sz){
+
+#ifdef _WIN32
+	return _read(fd,buffer,sz);
+#endif
+
+#ifdef __GNUC__
+	return read(fd,buffer,sz);
+#endif
+
+}
+
+int SbetProcessor::doOpen(const char * filename){
+#ifdef _WIN32
+        return _open(filename,_O_RDONLY);
+#endif
+
+#ifdef __GNUC__
+        return open(filename,O_RDONLY);
+#endif
+}
+
 bool SbetProcessor::readFile(std::string & filename){
 	int fd;
 
-	if((fd=open(filename.c_str(),O_RDONLY)) == -1){
+	if((fd=doOpen(filename.c_str())) == -1){
 		std::cerr << "Cannot open file " << filename << std::endl;
 		return false;
 	}
 
 	SbetEntry entry;
 
-	while(read(fd,(void*)&entry,sizeof(SbetEntry)) == sizeof(SbetEntry)){
+	while(doRead(fd,(void*)&entry,sizeof(SbetEntry)) == sizeof(SbetEntry)){
 		processEntry(&entry);
 	}
 
