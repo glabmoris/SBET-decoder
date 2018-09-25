@@ -1,8 +1,15 @@
 pipeline {
 
     environment {
+	major=0
+	minor=1
+	patch="${env.BUILD_ID}"
+        name="${env.JOB_NAME}"
+        version="$major.$minor.$patch"
+    	exec_name="sbet-decoder-$version"
 
-    
+        publishDir="/var/www/html/$name/$version"
+        lastPublishDir="/var/www/html/$name/last"
     }
 
     agent none
