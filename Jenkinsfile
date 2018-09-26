@@ -43,7 +43,7 @@ pipeline {
 	    steps {
 		//compile
 		bat 'if not exist build\bin mkdir build\bin'
-		bat 'call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\bin &&cl ..\\..\\src\\main.cpp
+		bat 'call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\bin &&cl ..\\..\\src\\main.cpp'
                 bat 'copy build\\bin\\main.exe  build\\bin\\windows-x64\\bin\\%exec_name%.exe'
 
                 archive('build\\bin\\main.exe') // pour le test (path codé en dur dans le test ...)
@@ -51,7 +51,7 @@ pipeline {
 
                 bat 'if not exist build\\test mkdir build\\test'
                 bat 'if not exist build\\test\\bin mkdir build\\test\\bin'
-                bat 'call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\test\\bin &&cl ..\\..\\..\\src\\main.cpp
+                bat 'call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\test\\bin &&cl ..\\..\\..\\src\\main.cpp'
                 archive('build/test/bin/main.exe')
 
 		bat 'if not exist build\test mkdir build\test'
