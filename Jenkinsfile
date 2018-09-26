@@ -39,7 +39,7 @@ pipeline {
             }
         }
        stage('BUILD WINDOWS AND TEST'){
-            agent {label 'windows10-x64'}
+            agent {label 'windows10-x64-2'}
 	    steps {
 		//compile
 		bat 'if not exist build\\bin mkdir build\\bin'
