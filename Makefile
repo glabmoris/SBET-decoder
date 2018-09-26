@@ -18,8 +18,7 @@ doc:
 	doxygen
 	
 sbet:
-	src/main.cpp
-	mkdir -p build
-	g++ -o build/sbet-decoder src/main.cpp
+	mkdir -p build/bin
+	g++ -o build/bin/sbet-decoder src/main.cpp
 	
 deploy:
