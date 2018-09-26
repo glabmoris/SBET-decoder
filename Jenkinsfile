@@ -55,10 +55,10 @@ pipeline {
                 archive('build/test/bin/main.exe')
 
 		bat 'if not exist build\test mkdir build\test'
-		bat 'copy /b test\data\* build\test'
-		bat 'mkdir build\test\reports'
-		bat 'if not exist build\test/reports rd /s /q build\test\reports'
-		bat 'cd build\test && bin\main.exe -r junit -o reports/TEST-sbet-decoder-windows10-x64.xml'
+		bat 'copy /b test\\data\\* build\test'
+		bat 'mkdir build\\test\\reports'
+		bat 'if not exist build\\test\\reports rd /s /q build\\test\\reports'
+		bat 'cd build\\test && bin\\main.exe -r junit -o reports/TEST-sbet-decoder-windows10-x64.xml'
 
 	  }
 	  post {
