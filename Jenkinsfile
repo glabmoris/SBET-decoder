@@ -77,5 +77,5 @@ pipeline {
                 sh 'cp  /var/lib/jenkins/jobs/$name/builds/$patch/archive/build/test/bin/test-sbet-decoder.exe  $binWinx64PublishDir/.'
             }
         }
-
+  }
 }
