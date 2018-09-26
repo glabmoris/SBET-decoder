@@ -73,7 +73,7 @@ int SbetProcessor::doRead(int fd,void * buffer,unsigned int sz){
 
 int SbetProcessor::doOpen(const char * filename){
 #ifdef _WIN32
-        return _open(filename,_O_RDONLY);
+        return _open(filename,_O_RDONLY|_O_BINARY);
 #endif
 
 #ifdef __GNUC__
