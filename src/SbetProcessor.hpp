@@ -73,7 +73,7 @@ int SbetProcessor::doRead(int fd,void * buffer,unsigned int sz){
 
 int SbetProcessor::doOpen(const char * filename){
 #ifdef _WIN32
-        return _open(filename,_O_RDONLY);
+        return _open(filename,_O_RDONLY|_O_BINARY);
 #endif
 
 #ifdef __GNUC__
@@ -90,10 +90,15 @@ bool SbetProcessor::readFile(std::string & filename){
 	}
 
 	SbetEntry entry;
+	
+	int byteRead;
 
-	while(doRead(fd,(void*)&entry,sizeof(SbetEntry)) == sizeof(SbetEntry)){
+	while(byteRead = doRead(fd,(void*)&entry,sizeof(SbetEntry)) == sizeof(SbetEntry)){
 		processEntry(&entry);
 	}
+	
+	if(byteRead == -1)
+		perror("Error! Not all bytes have been read");
 
 	return true;
 }
