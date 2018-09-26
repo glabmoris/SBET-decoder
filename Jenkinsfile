@@ -42,7 +42,7 @@ pipeline {
             agent {'windows10-x64'}
 	    steps {
 		//compile
-		bat 'if not exist build\bin mkdir build\bin'
+		bat 'if not exist build\\bin mkdir build\\bin'
 		bat 'call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\bin &&cl ..\\..\\src\\main.cpp'
                 bat 'copy build\\bin\\main.exe  build\\bin\\windows-x64\\bin\\%exec_name%.exe'
 
@@ -54,8 +54,8 @@ pipeline {
                 bat 'call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\test\\bin &&cl ..\\..\\..\\src\\main.cpp'
                 archive('build/test/bin/main.exe')
 
-		bat 'if not exist build\test mkdir build\test'
-		bat 'copy /b test\\data\\* build\test'
+		bat 'if not exist build\\test mkdir build\\test'
+		bat 'copy /b test\\data\\* build\\test'
 		bat 'mkdir build\\test\\reports'
 		bat 'if not exist build\\test\\reports rd /s /q build\\test\\reports'
 		bat 'cd build\\test && bin\\main.exe -r junit -o reports/TEST-sbet-decoder-windows10-x64.xml'
@@ -63,7 +63,7 @@ pipeline {
 	  }
 	  post {
 	     always {
-		junit 'build\test\reports\TEST-sbet-decoder-windows10-x64.xml'
+		junit 'build\\test\\reports\\TEST-sbet-decoder-windows10-x64.xml'
 	  }
 		
 	}
