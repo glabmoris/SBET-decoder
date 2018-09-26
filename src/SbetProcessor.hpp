@@ -90,10 +90,15 @@ bool SbetProcessor::readFile(std::string & filename){
 	}
 
 	SbetEntry entry;
+	
+	int byteRead;
 
-	while(doRead(fd,(void*)&entry,sizeof(SbetEntry)) == sizeof(SbetEntry)){
+	while(byteRead = doRead(fd,(void*)&entry,sizeof(SbetEntry)) == sizeof(SbetEntry)){
 		processEntry(&entry);
 	}
+	
+	if(byteRead == -1)
+		perror("Error! Not all bytes have been read");
 
 	return true;
 }
