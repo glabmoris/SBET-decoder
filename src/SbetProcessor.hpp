@@ -98,7 +98,7 @@ bool SbetProcessor::readFile(std::string & filename){
 	}
 	
 	if(byteRead == -1)
-		perror("Error! Not all bytes have been read");
+		perror("Error while reading file");
 
 	return true;
 }
