@@ -34,7 +34,7 @@ pipeline {
             agent { label 'master'}
             steps {
               	sh 'make'
-                //sh 'mkdir -p $binMasterPublishDir'
+                sh 'mkdir -p $binMasterPublishDir'
         	sh 'cp -r build/bin/sbet-decoder $binMasterPublishDir/$exec_name'
             }
         }
