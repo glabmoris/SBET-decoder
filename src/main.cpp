@@ -4,17 +4,15 @@
 
 #ifndef MAIN_CPP
 #define MAIN_CPP
-
-#include <cstdlib>
-#include <cstdio>
-#include <string>
-
-
 //For M_PI
 #ifdef _WIN32
 #define _USE_MATH_DEFINES
 #endif
 
+
+#include <cstdlib>
+#include <cstdio>
+#include <string>
 #include <cmath>
 
 
