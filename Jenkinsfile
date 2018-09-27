@@ -46,29 +46,27 @@ pipeline {
 		bat 'call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\bin &&cl ..\\..\\src\\main.cpp /Fesbet-decoder.exe'
 		bat 'cd ..\\..\\'
                 bat 'if not exist build\\bin\\windows-x64 mkdir build\\bin\\windows-x64'
-                bat 'if not exist build\\bin\\windows-x64\\bin mkdir build\\bin\\windows-x64\\bin'
                 bat 'copy /b build\\bin\\*.exe build\\bin\\windows-x64'
-                bat 'copy build\\bin\\main.exe  build\\bin\\windows-x64\\bin\\%exec_name%.exe'
+                bat 'copy build\\bin\\sbet-decoder.exe  build\\bin\\windows-x64\\%exec_name%.exe'
 
-                archive('build\\bin\\main.exe') // pour le test (path codé en dur dans le test ...)
-                archive("build\\bin\\windows-x64\\bin\\*.exe")  // pour la publication
+                archiveArtifacts('build\\bin\\sbet-decoder.exe') // pour le test (path codé en dur dans le test ...)
+                archiveArtifacts('build\\bin\\windows-x64\\*.exe')  // pour la publication
 
                 bat 'if not exist build\\test mkdir build\\test'
-                bat 'if not exist build\\test\\bin mkdir build\\test\\bin'
-                bat 'call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\test\\bin &&cl ..\\..\\..\\src\\main.cpp /FeTESTsbet-decoder.exe'
-		bat 'cd ..\\..\\..\\'
-                archive('build/test/bin/main.exe')
+		bat 'g++ -Wall test\\CatchMain.cpp -c -o build\\test\\testCatchMain.o'
+	 	bat 'build\\test\\CatchMain.o test\\TemplateTest.cpp -o build\\test\\TemplateTest && build\\test\\TemplateTest -r compact'
+                archiveArtifacts('build/test/bin/TESTsbet-decoder.exe')
 
 		bat 'if not exist build\\test mkdir build\\test'
 		bat 'copy /b test\\data\\* build\\test'
 		bat 'if not exist build\\test\\reports rd /s /q build\\test\\reports'
 		bat 'mkdir build\\test\\reports'		
-		bat 'cd build\\test && bin\\main.exe -r junit -o reports/TEST-sbet-decoder-windows10-x64.xml'
+		bat 'cd build\\test && TemplateTest.exe -r junit -o reports\\TemplateTest-windows10-x64.xml'
 
 	  }
 	  post {
 	     always {
-		junit 'build\\test\\reports\\TEST-sbet-decoder-windows10-x64.xml'
+		junit 'build\\test\\reports\\TemplateTest-windows10-x64.xml'
 	  }
 		
 	}
