@@ -76,8 +76,8 @@ pipeline {
          agent { label 'master' }
             steps {
                 sh 'mkdir -p $binWinx64PublishDir'
-                sh 'cp  /var/lib/jenkins/jobs/$name/builds/$patch/archive/build/bin/windows-x64/bin/$exec_name.exe  $binWinx64PublishDir/.'
-                sh 'cp  /var/lib/jenkins/jobs/$name/builds/$patch/archive/build/test/bin/test-sbet-decoder.exe  $binWinx64PublishDir/.'
+                sh 'cp  /var/lib/jenkins/jobs/$name/builds/$patch/archive/build/bin/windows-x64/$exec_name.exe  $binWinx64PublishDir/.'
+                sh 'cp  /var/lib/jenkins/jobs/$name/builds/$patch/archive/build/test/TemplateTest.exe  $binWinx64PublishDir/.'
             }
         }
   }
