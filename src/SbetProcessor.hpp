@@ -10,7 +10,10 @@
 #include <fcntl.h>
 #include <string>
 #include <iostream>
+
+#ifdef __GNUC__
 #include <unistd.h>
+#endif
 
 #ifdef _WIN32
 #include <io.h>
