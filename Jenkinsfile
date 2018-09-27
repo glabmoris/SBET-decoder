@@ -54,7 +54,7 @@ pipeline {
 
                 bat 'if not exist build\\test mkdir build\\test'
 		bat 'g++ -Wall test\\CatchMain.cpp -c -o build\\test\\CatchMain.o'
-	 	bat 'build\\test\\CatchMain.o test\\TemplateTest.cpp -o build\\test\\TemplateTest && build\\test\\TemplateTest -r compact'
+	 	bat 'g++ -Wall build\\test\\CatchMain.o test\\TemplateTest.cpp -o build\\test\\TemplateTest && build\\test\\TemplateTest -r compact'
                 archiveArtifacts('build/test/bin/TESTsbet-decoder.exe')
 
 		bat 'if not exist build\\test mkdir build\\test'
