@@ -59,7 +59,7 @@ pipeline {
 
 		bat 'if not exist build\\test mkdir build\\test'
 		bat 'copy /b test\\data\\* build\\test'
-		bat 'if not exist build\\test\\reports rd /s /q build\\test\\reports'
+		bat 'if exist build\\test\\reports rd /s /q build\\test\\reports'
 		bat 'mkdir build\\test\\reports'		
 		bat 'cd build\\test && TemplateTest.exe -r junit -o reports\\TemplateTest-windows10-x64.xml'
 
