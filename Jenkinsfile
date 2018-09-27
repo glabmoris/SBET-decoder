@@ -43,7 +43,7 @@ pipeline {
 	    steps {
 		//compile
 		bat 'if not exist build\\bin mkdir build\\bin'
-		bat 'call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\bin &&cl ..\\..\\src\\main.cpp'
+		bat 'call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\bin &&cl ..\\..\\src\\main.cpp /Fesbet-decoder.exe'
 		bat 'cd ..\\..\\'
                 bat 'if not exist build\\bin\\windows-x64 mkdir build\\bin\\windows-x64'
                 bat 'if not exist build\\bin\\windows-x64\\bin mkdir build\\bin\\windows-x64\\bin'
@@ -55,14 +55,14 @@ pipeline {
 
                 bat 'if not exist build\\test mkdir build\\test'
                 bat 'if not exist build\\test\\bin mkdir build\\test\\bin'
-                bat 'call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\test\\bin &&cl ..\\..\\..\\src\\main.cpp'
+                bat 'call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\test\\bin &&cl ..\\..\\..\\src\\main.cpp /FeTESTsbet-decoder.exe'
 		bat 'cd ..\\..\\..\\'
                 archive('build/test/bin/main.exe')
 
 		bat 'if not exist build\\test mkdir build\\test'
 		bat 'copy /b test\\data\\* build\\test'
-		bat 'mkdir build\\test\\reports'
 		bat 'if not exist build\\test\\reports rd /s /q build\\test\\reports'
+		bat 'mkdir build\\test\\reports'		
 		bat 'cd build\\test && bin\\main.exe -r junit -o reports/TEST-sbet-decoder-windows10-x64.xml'
 
 	  }
