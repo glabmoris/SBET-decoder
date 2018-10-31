@@ -1,8 +1,10 @@
 CC=g++
 CFLAGS=-Wall
 
-default: sbet
-
+default:
+	mkdir -p build/bin
+	$(CC) $(CFLAGS) -o build/bin/sbet-decoder src/sbet-decoder.cpp
+	$(CC) $(CFLAGS) -o build/bin/accuracy-decoder src/accuracy-decoder.cpp
 test: clean
 	mkdir -p build/test
 	$(CC) $(CFLAGS) test/CatchMain.cpp -c -o build/test/CatchMain.o
@@ -10,14 +12,10 @@ test: clean
 
 clean:
 	rm -rf build
-	
+
 doc:
 	rm -rf build/doxygen
 	mkdir -p build/doxygen
 	doxygen
-	
-sbet:
-	mkdir -p build/bin
-	g++ -o build/bin/sbet-decoder src/main.cpp
-	
+
 deploy:
