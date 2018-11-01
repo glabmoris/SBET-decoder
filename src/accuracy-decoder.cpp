@@ -27,18 +27,18 @@ void printUsage(){
 class AccuracyPrinter: public AccuracyProcessor{
 	public:
 		AccuracyPrinter(){
-			printf("Time a b c d e f g h i\n");
+			printf("Time NorthingSD EastingSD AltitudeSD SpeedNorthSD SpeedEastSD SpeedAltitudeSD g h i\n");
 		}
 
 		void processEntry(AccuracyEntry * entry){
 			printf("%lf %lf %lf %lf %lf %lf %lf %lf %lf %lf\n",
 				entry->time,
-				entry->a,
-				entry->b,
-                                entry->c,
-                                entry->d,
-                                entry->e,
-                                entry->f,
+				entry->northingSd,
+				entry->eastingSd,
+                                entry->altitudeSd,
+                                entry->speedNorthSd,
+                                entry->speedEastSd,
+                                entry->speedAltitudeSd,
                                 entry->g,
                                 entry->h,
                                 entry->i

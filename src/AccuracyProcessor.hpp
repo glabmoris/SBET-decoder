@@ -22,15 +22,15 @@
 #pragma pack(1)
 typedef struct{
 	double time;    	//GPS seconds of week
-	double a; 	//???
-	double b;	//???
-	double c;    	//altitude
-	double d;    	//velocity in x direction
-	double e;    	//velocity in y direction
-	double f;    	//velocity in z direction
-	double g;    	//roll angle
-	double h;    	//pitch angle
-	double i;    	//heading angle
+	double northingSd; 	//northing standard deviation
+	double eastingSd;	//easting standard deviation
+	double altitudeSd;    	//altitude standard deviation
+	double speedNorthSd;    //northing speed standard deviation
+	double speedEastSd;    	//easting speed standard deviation
+	double speedAltitudeSd; //vertical speed standard deviation
+	double g;    		//???
+	double h;    		//???
+	double i;    		//???
 } AccuracyEntry;
 #pragma pack()
 
