@@ -52,14 +52,7 @@ pipeline {
               sh "make doc"
             }
         }
-        stage('BUILD MASTER'){
-            agent { label 'master'}
-            steps {
-              	sh 'make'
-                sh 'mkdir -p $binMasterPublishDir'
-        	sh 'cp -r build/bin/sbet-decoder $binMasterPublishDir/$exec_name'
-            }
-        }
+
        stage('BUILD WINDOWS AND TEST'){
             agent {label 'windows10-x64-2'}
 	    steps {
@@ -90,6 +83,15 @@ pipeline {
 	}
     }
     
+        stage('BUILD MASTER'){
+            agent { label 'master'}
+            steps {
+              	sh 'make'
+                sh 'mkdir -p $binMasterPublishDir'
+        	sh 'cp -r build/bin/sbet-decoder $binMasterPublishDir/$exec_name'
+            }
+        }
+
 	stage('STOP VM'){
     	    agent { label 'master'}
             steps {
