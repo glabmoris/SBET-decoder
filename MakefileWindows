@@ -8,7 +8,7 @@ default:
 test: clean
 	mkdir build\test\reports
 	$(CC) $(CFLAGS) -o build\test\tests test\CatchMain.cpp
-	build\test\tests.exe -r junit -o build\test\reports\test-reports.xml
+	build\test\tests.exe #-r junit -o build\test\reports\test-reports.xml
 	
 clean:
 	if exist "build" rmdir /q /s build
