@@ -8,7 +8,7 @@ default:
 test: clean
 	mkdir -p build/test/reports
 	$(CC) $(CFLAGS) -o build/test/tests test/CatchMain.cpp
-	build/test/tests -r junit -o build/test/reports/test-reports.xml
+	build/test/tests #-r junit -o build/test/reports/test-reports.xml
 clean:
 	rm -rf build
 

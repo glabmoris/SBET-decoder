@@ -11,3 +11,5 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 #include "TemplateTest.hpp"
+#include "SbetOutputCountTest.hpp"
+#include "AccuracyOutputCountTest.hpp"

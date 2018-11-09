@@ -67,7 +67,8 @@ pipeline {
 	  }
 	  post {
 	     always {
-		junit 'build\\test\\reports\\*.xml'
+		bat "echo 'No junit reports yet'"
+		//junit 'build\\test\\reports\\*.xml'
 	  }
 	     aborted{
       		   timeout(time: 10, unit: 'SECONDS'){

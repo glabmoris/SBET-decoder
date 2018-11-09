@@ -3,16 +3,14 @@
  */
 
 /* 
- * File:   TemplateTest.cpp
+ * File:   TemplateTest.hpp
  * Author: Hugo Valcourt
  *
  * Created on September 21, 2018, 10:10 AM
  */
 
-
 #include "catch.hpp"
 
 TEST_CASE( "Test Template" ) {
-    
     REQUIRE(true);
 }
