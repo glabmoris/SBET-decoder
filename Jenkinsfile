@@ -103,8 +103,8 @@ pipeline {
          agent { label 'master' }
             steps {
                 sh 'mkdir -p $binWinx64PublishDir'
-                sh 'cp  /var/lib/jenkins/jobs/$name/builds/$patch/archive/build/bin/windows-x64/sbet-decoder.exe $binWinx64PublishDir/$exec_name.exe '
-                sh 'cp  /var/lib/jenkins/jobs/$name/builds/$patch/archive/build/bin/windows-x64/accuracy-decoder.exe $binWinx64PublishDir/accuracy-decoder-$version.exe '
+                sh 'cp  /var/lib/jenkins/jobs/$name/builds/$patch/archive/build/bin/sbet-decoder.exe $binWinx64PublishDir/$exec_name.exe '
+                sh 'cp  /var/lib/jenkins/jobs/$name/builds/$patch/archive/build/bin/accuracy-decoder.exe $binWinx64PublishDir/accuracy-decoder-$version.exe '
             }
         }
   }
