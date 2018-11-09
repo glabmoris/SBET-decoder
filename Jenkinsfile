@@ -90,6 +90,7 @@ pipeline {
               	sh 'make'
                 sh 'mkdir -p $binMasterPublishDir'
         	sh 'cp -r build/bin/sbet-decoder $binMasterPublishDir/$exec_name'
+                sh 'cp -r build/bin/accuracy-decoder $binMasterPublishDir/accuracy-decoder-$version'
             }
         }
 
