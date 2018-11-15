@@ -13,3 +13,4 @@
 #include "TemplateTest.hpp"
 #include "SbetOutputCountTest.hpp"
 #include "AccuracyOutputCountTest.hpp"
+#include "CheckLinesTest.hpp"
