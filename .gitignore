@@ -1,3 +1,5 @@
 build
 build/
 nbproject
+test/data/output-accuracy-2018-07-11.txt
+test/data/output-sbet-2018-07-11.txt

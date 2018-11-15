@@ -17,7 +17,7 @@
 #include "Utils/IO.hpp"
 
 #ifdef _WIN32
-#define M_PI = 3.14159265358979323846
+#define M_PI 3.14159265358979323846
 #endif
 
 #ifndef CHECKLINESTEST_HPP
@@ -238,14 +238,14 @@ TEST_CASE(" CheckLinesTest ") {
     AccuracyBuilder accuracy;
 
     accuracy.readFile(inputFile);
-    accuracy.WriteEntries("output-accuracy-2018-07-11.txt");
-    REQUIRE(accuracy.io.CheckLines(accuracy.io.GetStringVector("test/data/real-output-accuracy-2018-07-11.txt"), "output-accuracy-2018-07-11.txt"));
+    accuracy.WriteEntries("test//data//output-accuracy-2018-07-11.txt");
+    REQUIRE(accuracy.io.CheckLines(accuracy.io.GetStringVector("test/data/real-output-accuracy-2018-07-11.txt"), "test//data//output-accuracy-2018-07-11.txt"));
 
     SbetBuilder sbet;
 
     sbet.readFile(inputFile);
-    sbet.WriteEntries("output-sbet-2018-07-11.txt");
-    REQUIRE(sbet.io.CheckLines(accuracy.io.GetStringVector("test/data/real-output-sbet-2018-07-11.txt"), "output-sbet-2018-07-11.txt"));
+    sbet.WriteEntries("test//data//output-sbet-2018-07-11.txt");
+    REQUIRE(sbet.io.CheckLines(accuracy.io.GetStringVector("test/data/real-output-sbet-2018-07-11.txt"), "test//data//output-sbet-2018-07-11.txt"));
 }
 
 #endif /* CHECKLINESTEST_HPP */
