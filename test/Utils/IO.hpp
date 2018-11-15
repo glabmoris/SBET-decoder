@@ -43,7 +43,7 @@ bool IO::CheckLines(std::vector<std::string> fileLines, std::string fileName) {
         int lIndex = 0;
         while (std::getline(file, str)) {
             if (lIndex > 0) {
-                if (!str.compare(fileLines[lIndex])) {
+                if (str != fileLines[lIndex]) {
                     std::cerr << "Line " << lIndex << " is incorrect in the file " << fileName << std::endl;
                     std::cerr << str << " is not == to " << fileLines[lIndex] << std::endl;
                     std::cout << str << std::endl;

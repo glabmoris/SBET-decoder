@@ -48,95 +48,27 @@ public:
             file << "Time Latitude Longitude Altitude SpeedX SpeedY SpeedZ Heading Pitch Roll Wander ForceX ForceY ForceZ AngularRateX AngularRateY AngularRateZ\n";
 
             for (unsigned int entry = 0; entry < entries.size(); entry++) {
-                std::string line = "";
-                std::ostringstream tempStr;
-                tempStr << std::fixed;
-                tempStr << entries[entry].time;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << (entries[entry].latitude * 180) / M_PI;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << (entries[entry].longitude * 180) / M_PI;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << entries[entry].altitude;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << entries[entry].xSpeed;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << entries[entry].ySpeed;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << entries[entry].zSpeed;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << entries[entry].heading;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << entries[entry].pitch;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << entries[entry].roll;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << entries[entry].wander;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << entries[entry].xForce;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << entries[entry].yForce;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << entries[entry].zForce;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << entries[entry].xAngularRate;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << entries[entry].yAngularRate;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << entries[entry].zAngularRate;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                file << std::endl;
+                char tempBuffer[1024];
+                sprintf(tempBuffer, "%lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf\n",
+                        entries[entry].time,
+                        (entries[entry].latitude * 180) / M_PI,
+                        (entries[entry].longitude * 180) / M_PI,
+                        entries[entry].altitude,
+                        entries[entry].xSpeed,
+                        entries[entry].ySpeed,
+                        entries[entry].zSpeed,
+                        entries[entry].heading,
+                        entries[entry].pitch,
+                        entries[entry].roll,
+                        entries[entry].wander,
+                        entries[entry].xForce,
+                        entries[entry].yForce,
+                        entries[entry].zForce,
+                        entries[entry].xAngularRate,
+                        entries[entry].yAngularRate,
+                        entries[entry].zAngularRate
+                        );
+                file << tempBuffer;
             }
         }
         file.close();
@@ -169,61 +101,20 @@ public:
             file << "Time NorthingSD EastingSD AltitudeSD SpeedNorthSD SpeedEastSD SpeedAltitudeSD g h i\n";
 
             for (unsigned int entry = 0; entry < entries.size(); entry++) {
-
-                std::string line = "";
-                std::ostringstream tempStr;
-                tempStr << std::fixed;
-                tempStr << entries[entry].time;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << entries[entry].northingSd;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << entries[entry].eastingSd;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << entries[entry].altitudeSd;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << entries[entry].speedNorthSd;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << entries[entry].speedEastSd;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << entries[entry].speedAltitudeSd;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << entries[entry].g;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << entries[entry].h;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                tempStr << entries[entry].i;
-                file << tempStr.str();
-                file << " ";
-                tempStr.clear();
-                tempStr.str("");
-                file << std::endl;
+                char tempBuffer[1024];
+                sprintf(tempBuffer, "%lf %lf %lf %lf %lf %lf %lf %lf %lf %lf\n",
+                        entries[entry].time,
+                        entries[entry].northingSd,
+                        entries[entry].eastingSd,
+                        entries[entry].altitudeSd,
+                        entries[entry].speedNorthSd,
+                        entries[entry].speedEastSd,
+                        entries[entry].speedAltitudeSd,
+                        entries[entry].g,
+                        entries[entry].h,
+                        entries[entry].i
+                        );
+                file << tempBuffer;
             }
         }
         file.close();
