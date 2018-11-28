@@ -17,11 +17,33 @@ pipeline {
 
     agent none
     stages {
+
+        stage('STAR VM'){
+    	    agent { label 'master'}
+            steps {
+      		   timeout(time: 10, unit: 'SECONDS'){
+              sh 'ssh hugo@192.168.0.219 "bash -s" < /var/lib/jenkins/Scripts/Start_A_VM.sh windows-x64-C++'
+		   }
+            }
+        }
+
         stage('TEST MASTER'){
             agent { label 'master'}
             steps {
               sh "make test"
             }
+	  post {
+	     aborted{
+      		   timeout(time: 10, unit: 'SECONDS'){
+              sh 'ssh hugo@192.168.0.219 "bash -s" < /var/lib/jenkins/Scripts/Close_A_VM.sh windows-x64-C++'
+		   }
+	     }
+	     failure{
+      		   timeout(time: 10, unit: 'SECONDS'){
+              sh 'ssh hugo@192.168.0.219 "bash -s" < /var/lib/jenkins/Scripts/Close_A_VM.sh windows-x64-C++'
+		   }
+	     }
+	  }
         }
 
         stage('DOCUMENTATION'){
@@ -30,54 +52,61 @@ pipeline {
               sh "make doc"
             }
         }
+
+       stage('BUILD WINDOWS AND TEST'){
+            agent {label 'windows10-x64-2'}
+	    steps {
+		bat "Scripts\\change_makefile_name.bat"
+		//compile
+		bat "make test"
+		bat "make"
+
+                archiveArtifacts('build\\bin\\sbet-decoder.exe')
+                archiveArtifacts('build\\bin\\accuracy-decoder.exe')
+
+	  }
+	  post {
+	     always {
+		bat "echo 'No junit reports yet'"
+		//junit 'build\\test\\reports\\*.xml'
+	  }
+	     aborted{
+      		   timeout(time: 10, unit: 'SECONDS'){
+		     bat "ssh jenkins@192.168.0.105 /var/lib/jenkins/Scripts/Call_Close_A_VM.sh windows-x64-C++"
+		   }
+	     }
+	     failure{
+      		   timeout(time: 10, unit: 'SECONDS'){
+		     bat "ssh jenkins@192.168.0.105 /var/lib/jenkins/Scripts/Call_Close_A_VM.sh windows-x64-C++"
+		   }
+	     }
+		
+	}
+    }
+    
         stage('BUILD MASTER'){
             agent { label 'master'}
             steps {
               	sh 'make'
                 sh 'mkdir -p $binMasterPublishDir'
         	sh 'cp -r build/bin/sbet-decoder $binMasterPublishDir/$exec_name'
+                sh 'cp -r build/bin/accuracy-decoder $binMasterPublishDir/accuracy-decoder-$version'
             }
         }
-       stage('BUILD WINDOWS AND TEST'){
-            agent {label 'windows10-x64-2'}
-	    steps {
-		//compile
-		bat 'if not exist build\\bin mkdir build\\bin'
-		bat 'call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\bin &&cl ..\\..\\src\\main.cpp /Fesbet-decoder.exe'
-		bat 'cd ..\\..\\'
-                bat 'if not exist build\\bin\\windows-x64 mkdir build\\bin\\windows-x64'
-                bat 'copy /b build\\bin\\*.exe build\\bin\\windows-x64'
-                bat 'copy build\\bin\\sbet-decoder.exe  build\\bin\\windows-x64\\%exec_name%.exe'
 
-                archiveArtifacts('build\\bin\\sbet-decoder.exe') // pour le test (path codé en dur dans le test ...)
-                archiveArtifacts('build\\bin\\windows-x64\\*.exe')  // pour la publication
+	stage('STOP VM'){
+    	    agent { label 'master'}
+            steps {
+              sh 'ssh hugo@192.168.0.219 "bash -s" < /var/lib/jenkins/Scripts/Close_A_VM.sh windows-x64-C++'
+            }
+        }
 
-                bat 'if not exist build\\test mkdir build\\test'
-		bat 'g++ -Wall test\\CatchMain.cpp -c -o build\\test\\CatchMain.o'
-	 	bat 'g++ -Wall build\\test\\CatchMain.o test\\TemplateTest.cpp -o build\\test\\TemplateTest && build\\test\\TemplateTest -r compact'
-                archiveArtifacts('build/test/TemplateTest.exe')
-
-		bat 'if not exist build\\test mkdir build\\test'
-		bat 'copy /b test\\data\\* build\\test'
-		bat 'if exist build\\test\\reports rd /s /q build\\test\\reports'
-		bat 'mkdir build\\test\\reports'		
-		bat 'cd build\\test && TemplateTest.exe -r junit -o reports\\TemplateTest-windows10-x64.xml'
-
-	  }
-	  post {
-	     always {
-		junit 'build\\test\\reports\\TemplateTest-windows10-x64.xml'
-	  }
-		
-	}
-    }
-    
     stage('SAVE WINDOWS EXE on SERVER'){
          agent { label 'master' }
             steps {
                 sh 'mkdir -p $binWinx64PublishDir'
-                sh 'cp  /var/lib/jenkins/jobs/$name/builds/$patch/archive/build/bin/windows-x64/$exec_name.exe  $binWinx64PublishDir/.'
-                sh 'cp  /var/lib/jenkins/jobs/$name/builds/$patch/archive/build/test/TemplateTest.exe  $binWinx64PublishDir/.'
+                sh 'cp  /var/lib/jenkins/jobs/$name/builds/$patch/archive/build/bin/sbet-decoder.exe $binWinx64PublishDir/$exec_name.exe '
+                sh 'cp  /var/lib/jenkins/jobs/$name/builds/$patch/archive/build/bin/accuracy-decoder.exe $binWinx64PublishDir/accuracy-decoder-$version.exe '
             }
         }
   }

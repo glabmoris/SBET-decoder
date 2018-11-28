@@ -93,14 +93,19 @@ bool SbetProcessor::readFile(std::string & filename){
 	}
 
 	SbetEntry entry;
-	
-	int byteRead;
 
-	while(byteRead = doRead(fd,(void*)&entry,sizeof(SbetEntry)) == sizeof(SbetEntry)){
-		processEntry(&entry);
+	int bytesRead;
+
+	do{
+		bytesRead = doRead(fd,(void*)&entry,sizeof(SbetEntry));
+
+		if(bytesRead == sizeof(SbetEntry)){
+			processEntry(&entry);
+		}
 	}
-	
-	if(byteRead == -1)
+	while(bytesRead > 0);
+
+	if(bytesRead == -1)
 		perror("Error while reading file");
 
 	return true;

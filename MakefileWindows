@@ -1,0 +1,21 @@
+CC=g++
+CFLAGS=-Wall
+
+default:
+	mkdir build\bin
+	$(CC) $(CFLAGS) -o build\bin\sbet-decoder src\sbet-decoder.cpp
+	$(CC) $(CFLAGS) -o build\bin\accuracy-decoder src\accuracy-decoder.cpp
+test: clean
+	mkdir build\test\reports
+	$(CC) $(CFLAGS) -o build\test\tests test\CatchMain.cpp
+	build\test\tests.exe #-r junit -o build\test\reports\test-reports.xml
+	
+clean:
+	if exist "build" rmdir /q /s build
+
+doc:
+	rm -rf build/doxygen
+	mkdir -p build/doxygen
+	doxygen
+
+deploy:
