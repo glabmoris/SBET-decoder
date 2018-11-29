@@ -39,9 +39,9 @@ class AccuracyPrinter: public AccuracyProcessor{
                                 entry->speedNorthSd,
                                 entry->speedEastSd,
                                 entry->speedAltitudeSd,
-                                entry->g,
-                                entry->h,
-                                entry->i
+                                entry->rollSd/60,
+                                entry->pitchSd/60,
+                                entry->headingSd/60
 			);
 		}
 };
