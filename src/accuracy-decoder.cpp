@@ -27,7 +27,7 @@ void printUsage(){
 class AccuracyPrinter: public AccuracyProcessor{
 	public:
 		AccuracyPrinter(){
-			printf("Time NorthingSD EastingSD AltitudeSD SpeedNorthSD SpeedEastSD SpeedAltitudeSD g h i\n");
+			printf("Time NorthingSD EastingSD AltitudeSD SpeedNorthSD SpeedEastSD SpeedAltitudeSD RollSd PitchSd HeadingSd\n");
 		}
 
 		void processEntry(AccuracyEntry * entry){
