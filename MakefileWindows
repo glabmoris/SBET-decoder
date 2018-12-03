@@ -1,14 +1,12 @@
-CC=g++
-CFLAGS=-Wall
 
 default:
 	mkdir build\bin
-	$(CC) $(CFLAGS) -o build\bin\sbet-decoder src\sbet-decoder.cpp
-	$(CC) $(CFLAGS) -o build\bin\accuracy-decoder src\accuracy-decoder.cpp
+	call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\bin &&cl ..\\..\\src\\sbet-decoder.cpp /EHsc /Fesbet-decoder.exe
+	call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\bin &&cl ..\\..\\src\\accuracy-decoder.cpp /EHsc /Feaccuracy-decoder.exe
 test: clean
 	mkdir build\test\reports
-	$(CC) $(CFLAGS) -o build\test\tests test\CatchMain.cpp
-	build\test\tests.exe #-r junit -o build\test\reports\test-reports.xml
+	call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\test &&cl ..\\..\\test\\CatchMain.cpp /EHsc /Fetests.exe
+	build\test\tests.exe
 	
 clean:
 	if exist "build" rmdir /q /s build
