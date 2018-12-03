@@ -28,9 +28,9 @@ typedef struct{
 	double speedNorthSd;    //northing speed standard deviation
 	double speedEastSd;    	//easting speed standard deviation
 	double speedAltitudeSd; //vertical speed standard deviation
-	double rollSd;    		//???
-	double pitchSd;    		//???
-	double headingSd;    		//???
+	double rollSd;    	//roll standard deviation
+	double pitchSd;    	//pitch standard deviation
+	double headingSd;    	//heading standard deviation
 } AccuracyEntry;
 #pragma pack()
 
