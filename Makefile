@@ -8,7 +8,7 @@ default:
 test: clean
 	mkdir -p build/test/reports
 	$(CC) $(CFLAGS) -o build/test/tests test/CatchMain.cpp
-	build/test/tests
+	build/test/tests -r junit -o build/test/reports/sbet-test-linux-report.xml
 clean:
 	rm -rf build
 

@@ -110,9 +110,9 @@ public:
                         entries[entry].speedNorthSd,
                         entries[entry].speedEastSd,
                         entries[entry].speedAltitudeSd,
-                        entries[entry].g,
-                        entries[entry].h,
-                        entries[entry].i
+                        entries[entry].rollSd,
+                        entries[entry].pitchSd,
+                        entries[entry].headingSd
                         );
                 file << tempBuffer;
             }
