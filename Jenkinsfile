@@ -33,6 +33,9 @@ pipeline {
               sh "make test"
             }
 	  post {
+	     always {
+             	   junit 'build/test/reports/*.xml'
+             }
 	     aborted{
       		   timeout(time: 10, unit: 'SECONDS'){
               sh 'ssh hugo@192.168.0.219 "bash -s" < /var/lib/jenkins/Scripts/Close_A_VM.sh windows-x64-C++'
@@ -67,8 +70,7 @@ pipeline {
 	  }
 	  post {
 	     always {
-		bat "echo 'No junit reports yet'"
-		//junit 'build\\test\\reports\\*.xml'
+		junit 'build\\test\\reports\\*.xml'
 	  }
 	     aborted{
       		   timeout(time: 10, unit: 'SECONDS'){

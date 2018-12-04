@@ -6,7 +6,7 @@ default:
 test: clean
 	mkdir build\test\reports
 	call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\test &&cl ..\\..\\test\\CatchMain.cpp /EHsc /Fetests.exe
-	build\test\tests.exe
+	build\test\tests.exe -r junit -o build\\test\\reports\\sbet-test-windows-x64-reports.xml
 	
 clean:
 	if exist "build" rmdir /q /s build
