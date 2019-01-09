@@ -44,7 +44,7 @@ typedef struct{
 class SbetProcessor{
 	public:
 		SbetProcessor();
-		virtual ~SbetProcessor();
+        virtual ~SbetProcessor();
 
 		bool readFile(std::string & filename);
 		virtual void processEntry(SbetEntry * entry)=0;
@@ -53,63 +53,6 @@ class SbetProcessor{
 		int doRead(int fd,void* buf,unsigned int sz);
 		int doOpen(const char * filename);
 };
-
-SbetProcessor::SbetProcessor(){
-
-}
-
-SbetProcessor::~SbetProcessor(){
-
-}
-
-int SbetProcessor::doRead(int fd,void * buffer,unsigned int sz){
-
-#ifdef _WIN32
-	return _read(fd,buffer,sz);
-#endif
-
-#ifdef __GNUC__
-	return read(fd,buffer,sz);
-#endif
-
-}
-
-int SbetProcessor::doOpen(const char * filename){
-#ifdef _WIN32
-        return _open(filename,_O_RDONLY|_O_BINARY);
-#endif
-
-#ifdef __GNUC__
-        return open(filename,O_RDONLY);
-#endif
-}
-
-bool SbetProcessor::readFile(std::string & filename){
-	int fd;
-
-	if((fd=doOpen(filename.c_str())) == -1){
-		std::cerr << "Cannot open file " << filename << std::endl;
-		return false;
-	}
-
-	SbetEntry entry;
-
-	int bytesRead;
-
-	do{
-		bytesRead = doRead(fd,(void*)&entry,sizeof(SbetEntry));
-
-		if(bytesRead == sizeof(SbetEntry)){
-			processEntry(&entry);
-		}
-	}
-	while(bytesRead > 0);
-
-	if(bytesRead == -1)
-		perror("Error while reading file");
-
-	return true;
-}
 
 
 #endif

@@ -3,7 +3,7 @@ CFLAGS=-Wall
 
 default:
 	mkdir -p build/bin
-	$(CC) $(CFLAGS) -o build/bin/sbet-decoder src/sbet-decoder.cpp
+	$(CC) $(CFLAGS) -o build/bin/sbet-decoder src/sbet-decoder.cpp src/SbetProcessor.cpp
 	$(CC) $(CFLAGS) -o build/bin/accuracy-decoder src/accuracy-decoder.cpp
 test: clean
 	mkdir -p build/test/reports
