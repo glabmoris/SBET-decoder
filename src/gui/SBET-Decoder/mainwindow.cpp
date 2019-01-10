@@ -4,15 +4,17 @@
 #include <QFileDialog>
 #include <QDesktopWidget>
 #include <QHeaderView>
+#include <QVBoxLayout>
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),table(NULL),sbet(NULL),
-    ui(new Ui::MainWindow)
+    QMainWindow(parent),table(NULL),sbet(NULL),ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
+    QVBoxLayout * layout = new QVBoxLayout(this->centralWidget());
+
     //Init table
-    table = new QTableWidget(this->centralWidget());
+    table = new QTableWidget();
     table->setColumnCount(17);
     table->setGeometry(QApplication::desktop()->screenGeometry());
 
@@ -24,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QHeaderView* header = table->horizontalHeader();
     header->setSectionResizeMode(QHeaderView::Stretch);
+
+    layout->addWidget(table);
 }
 
 MainWindow::~MainWindow()
