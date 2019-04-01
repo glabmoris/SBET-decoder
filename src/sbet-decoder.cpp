@@ -31,7 +31,7 @@ class SbetPrinter: public SbetProcessor{
 		}
 
 		void processEntry(SbetEntry * entry){
-			printf("%lf %.12lf %.12lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf\n",
+			printf("%lf %.12lf %.12lf %lf %lf %lf %lf %.12lf %.12lf %.12lf %lf %lf %lf %lf %lf %lf %lf\n",
 				entry->time,
 				(entry->latitude * 180) / M_PI,
 				(entry->longitude* 180) / M_PI,
