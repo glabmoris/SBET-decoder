@@ -4,7 +4,7 @@
 
 /* 
  * File:   SbetPrinter.hpp
- * Author: jordan
+ * Author: glm,jordan
  */
 
 #ifndef SBETPRINTER_HPP
