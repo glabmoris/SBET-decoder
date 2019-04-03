@@ -1,0 +1,2 @@
+Time NorthingSD EastingSD AltitudeSD SpeedNorthSD SpeedEastSD SpeedAltitudeSD RollSd PitchSd HeadingSd
+225092.532698 0.023356 0.023366 0.018463 0.005244 0.005267 0.004156 0.002758 0.002759 0.044579
